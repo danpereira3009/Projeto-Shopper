@@ -1,0 +1,40 @@
+.tabela {
+    padding: 2em;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.nome_produto {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+}
+
+.preco, .estoque {
+    width: 8em;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-size: 14px;
+}
+
+.preco th, .estoque th {
+    text-align: center;
+}
+
+.nome_produto h1, .preco h1, .estoque h1 {
+    font-size: 1.5em;
+    padding: 0.2em;
+    border: solid 1px rgb(226, 221, 221);
+}
+
+@media screen and (max-width: 1000px) {    
+    .nome_produto th, .estoque th, .preco th {
+        font-size: 16px;
+        min-height: 8em;
+        max-height: 8em;
+
+    }
+}
