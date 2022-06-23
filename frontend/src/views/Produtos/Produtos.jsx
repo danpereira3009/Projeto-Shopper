@@ -2,7 +2,8 @@ import React from "react"
 import './Produtos.css'
 import { useEffect, useState } from "react"
 
-export default (props) => {
+export default () => {
+    
     const [produtos, setProdutos] = useState([])
     const [setProduto] = useState({})
 
@@ -15,11 +16,13 @@ export default (props) => {
 <section>
    
     <main className="flex justify-center bg-white mt-4">
+
         <tr defaultValue={-1} onChange={e => {setProduto(JSON.parse(e.target.value))}} class="tabela">
                 <div class="nome_produto text-center">
                     <h1>Produtos Disponíveis</h1> 
                     {
                         produtos.map(produto => {
+                            //esse JSON.stringify é necessário? 
                             return <th value={JSON.stringify(produto)}>{produto.name}</th>
                         })
                     }
@@ -45,5 +48,6 @@ export default (props) => {
         </tr>
     </main>
 </section>
+
     )
 }

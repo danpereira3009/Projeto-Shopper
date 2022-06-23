@@ -2,24 +2,23 @@ import React, { useState } from "react"
 import ListaProdutos from "../../components/ListaProdutos"
 import Trash from "../../assets/Trash.svg"
 import Botao from '../../components/Botao'
-import './CriarPedido.css'
 import axios from 'axios'
 
 export default () => {
-    const NUMERO_ITENS_DELECAO = 1
 
+    const ItensAExcluir = 1
     const [produtos, setProdutos] = useState([])
     const [nomeCliente, setNomeCliente] = useState("")
     const [dataEntrega, setDataEntrega] = useState()
     const [valorTotal, setValorTotal] = useState(0)
 
-    function _click(produto) {
+    function deletar(produto) {
         //Duplica array de produtos
         const produtosSelecionados = [...produtos]
         const indexProduto = produtosSelecionados.indexOf(produto)
 
         //Deleto a partir do indice, a quantidade indicada
-        produtosSelecionados.splice(indexProduto, NUMERO_ITENS_DELECAO)
+        produtosSelecionados.splice(indexProduto, ItensAExcluir)
 
         //Seto o array de produtos com o novo sem o produto deletado
         setProdutos(produtosSelecionados)
@@ -60,7 +59,7 @@ export default () => {
 
             <h1 className="font-bold text-400 p-2 text-2xl text-center bg-white">Criar Pedido</h1>  
         
-            <main className="flex flex-col " class="container-main">        
+            <main className="flex flex-col" class="container-main">        
                 <div className="flex mt-4">
                     <div className="flex bg-white p-2 m-2" class="input-field">
                         <label class="block text-gray-700 text-sm font-bold mb-2" for="cliente">
@@ -71,7 +70,8 @@ export default () => {
                             id="cliente" 
                             type="text" 
                             onChange={(e) => {setNomeCliente(e.target.value)}}
-                            placeholder="Nome do Cliente"></input>
+                            placeholder="Nome do Cliente">
+                        </input>
                     </div>                
                     <div className="flex bg-white p-2 m-2" class="input-field">
                         <label class="block text-gray-700 text-sm font-bold mb-2" for="entrega">
@@ -82,7 +82,8 @@ export default () => {
                             id="data" 
                             type="date"
                             onChange={(e) => {setDataEntrega(e.target.value)}}
-                            placeholder="Data de Entrega"></input>
+                            placeholder="Data de Entrega">
+                        </input>
                     </div>
                 </div>
                 
@@ -91,7 +92,7 @@ export default () => {
                     produtosSelecionados={produtos}
                     setValorTotal={setValorTotal}
                     valorTotal={valorTotal}
-                     /> 
+                /> 
                 
                 <div class="table-container" className="flex justify-center mt-4">
                     <table>
@@ -112,7 +113,7 @@ export default () => {
                                         <td>R$ {item.produto.price * item.qty}</td>
                                         <td>
                                             <img
-                                            onClick={() => _click(item)}
+                                            onClick={() => deletar(item)}
                                             src={Trash} 
                                             alt="lixeira" 
                                             className="opacity-50 w-6 h-6 ml-6 hover:cursor-pointer 
@@ -126,7 +127,7 @@ export default () => {
                 </div>
 
                 <section class="button-section">
-                    <span>Valor Total: R$ {valorTotal}</span>
+                    <span className="self-center text-xl mr-5">Valor Total: R$ {valorTotal}</span>
                     <Botao label="Finalizar" click={_salvarPedido}></Botao>
                 </section>
             </main>
